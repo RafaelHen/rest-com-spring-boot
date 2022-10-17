@@ -3,33 +3,14 @@ package com.projeto.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "person")
 public class Person implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name = "nome", nullable = false, length = 80)
 	private String nome;
-	
-	@Column(name = "sobrenome", nullable = false, length = 80)
 	private String sobrenome;
-	
-	@Column(nullable = false, length = 100)
 	private String endereco;
-
-	@Column(nullable = false, length = 6)
 	private String genero;
 	
 	public Person() {}
