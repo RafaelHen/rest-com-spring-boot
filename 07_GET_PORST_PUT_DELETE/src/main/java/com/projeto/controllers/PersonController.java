@@ -12,42 +12,41 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projeto.model.Person;
+import com.projeto.data.vo.v1.PersonVO;
 import com.projeto.services.PersonService;
 
 @RestController
 @RequestMapping("/person")
-public class PersonController {
+public class PersonController  {
 
 	@Autowired
 	private PersonService service;
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Person> findAll() {
+	public List<PersonVO> findAll() {
 		return service.findAll();
 	}
 	
 	@GetMapping(value = "/{id}",
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person findById(@PathVariable(value = "id") Long id) throws Exception {
+	public PersonVO findById(@PathVariable(value = "id") Long id) throws Exception {
 		return service.findById(id);
 	}
 
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
 				produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person Create(@RequestBody Person person) throws Exception {
-		return service.create(person);
+	public PersonVO Create(@RequestBody PersonVO PersonVO) throws Exception {
+		return service.create(PersonVO);
 	}
 	
 
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
 				produces = MediaType.APPLICATION_JSON_VALUE)
-		public Person Update(@RequestBody Person person) throws Exception {
-			return service.update(person);
+		public PersonVO Update(@RequestBody PersonVO PersonVO) throws Exception {
+			return service.update(PersonVO);
 	}
 	
 	@DeleteMapping(value = "/{id}")
