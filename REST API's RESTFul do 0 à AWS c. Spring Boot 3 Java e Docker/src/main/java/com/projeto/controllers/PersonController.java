@@ -37,13 +37,13 @@ public class PersonController  {
 	}
 
 	
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+	@PostMapping(value = "/v1",consumes = MediaType.APPLICATION_JSON_VALUE,
 				produces = MediaType.APPLICATION_JSON_VALUE)
 	public PersonVO create(@RequestBody PersonVO PersonVO) throws Exception {
 		return service.create(PersonVO);
 	}
 
-	@PostMapping(value = "/V2",consumes = MediaType.APPLICATION_JSON_VALUE,
+	@PostMapping(value = "/v2",consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public PersonVOV2 createV2(@RequestBody PersonVOV2 personVOV2) throws Exception {
 		return service.createV2(personVOV2);
