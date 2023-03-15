@@ -20,6 +20,7 @@ public class Person implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	
 	@Column(name = "nome", nullable = false, length = 80)
 	private String nome;
 	
