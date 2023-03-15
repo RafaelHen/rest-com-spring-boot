@@ -7,12 +7,13 @@ import com.projeto.data.vo.v1.PersonVO;
 import com.projeto.model.Person;
 
 public class MockPerson {
-
-
+	// VERIFICA SE QUANDO CONVERTE UM VO PARA ENTIDADE OS DADOS CONTINUAM OS MESMOS 
+	//Mock de entidade
     public Person mockEntity() {
         return mockEntity(0);
     }
     
+    //Mock de VO
     public PersonVO mockVO() {
         return mockVO(0);
     }
