@@ -1,11 +1,15 @@
 package com.projeto.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
 
+import com.projeto.controllers.PersonController;
 import com.projeto.data.vo.v1.PersonVO;
 import com.projeto.data.vo.v2.PersonVOV2;
 import com.projeto.exception.ResourceNotFoundExcepetion;
@@ -27,16 +31,23 @@ public class PersonService {
 
 	public List<PersonVO> findAll() {
 		logger.info("Finding all PersonVO!");
+		List<Person>  entity = repository.findAll();
+		List<PersonVO> vos = new ArrayList<>();
+		
+		entity.forEach(e -> vos.add(DozerMapper.parseObject(e, PersonVO.class)));
 
-		return DozerMapper.parseListObject(repository.findAll(), PersonVO.class);
+//		DozerMapper.parseListObject(repository.findAll(), PersonVO.class);
+		return vos;
 	}
 
-	public PersonVO findById(Long id) {
+	public PersonVO findById(Long id) throws Exception {
 
 		logger.info("Finding one PersonVO!");
 
-		var Entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundExcepetion("No records found by ID!"));
-		return DozerMapper.parseObject(Entity, PersonVO.class);
+		var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundExcepetion("No records found by ID!"));
+		PersonVO vo = DozerMapper.parseObject(entity, PersonVO.class);
+		vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+		return vo;
 	}
 
 	public PersonVO create(PersonVO person) {
@@ -58,7 +69,7 @@ public class PersonService {
 	public PersonVO update(PersonVO PersonVO) {
 		logger.info("Updating one PersonVO!");
 
-		var entity = repository.findById(PersonVO.getId())
+		var entity = repository.findById(PersonVO.getKey())
 				.orElseThrow(() -> new ResourceNotFoundExcepetion("No records found by ID!"));
 
 		entity.setNome(PersonVO.getNome());
