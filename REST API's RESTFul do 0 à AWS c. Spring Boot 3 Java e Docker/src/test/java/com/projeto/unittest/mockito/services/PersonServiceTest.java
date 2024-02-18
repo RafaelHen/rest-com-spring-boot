@@ -47,9 +47,9 @@ class PersonServiceTest {
 
 	@Test
 	void testFindById() throws Exception {
-		Person person = input.mockEntity(1);
-		person.setId(1L);
-		when(personRepository.findById(1L)).thenReturn(Optional.of(person));
+		Person entity = input.mockEntity(1);
+		entity.setId(1L);
+		when(personRepository.findById(1L)).thenReturn(Optional.of(entity));
 		PersonVO result = personService.findById(1L);
 		
 		assertNotNull(result);
@@ -63,9 +63,26 @@ class PersonServiceTest {
 	}
 
 	@Test
-	void testCreate() {
-		fail("Not yet implemented");
-	}
+	void testCreate() throws Exception {
+		Person entity = input.mockEntity(1);
+		Person persisted = entity;
+		persisted.setId(1L);
+		
+		PersonVO vo = input.mockVO(1);
+		vo.setKey(1L);
+
+		entity.setId(1L);
+		when(personRepository.save(entity)).thenReturn(persisted);	
+		PersonVO result = personService.create(vo);
+
+		assertNotNull(result);
+		assertNotNull(result.getKey());
+		assertTrue(result.toString().contains("links: [</person/1>;rel=\"self\"]"));
+		assertEquals("Addres Test1", result.getEndereco());
+		assertEquals("First Name Test1", result.getNome());
+		assertEquals("Last Name Test1", result.getSobrenome());
+		assertEquals("Female", result.getGenero());
+		}
 
 	@Test
 	void testCreateV2() {
