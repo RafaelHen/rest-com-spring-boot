@@ -11,16 +11,19 @@ import io.swagger.v3.oas.models.info.License;
 public class OpenApiConfig {
 
 	@Bean
-	public OpenAPI customOpenApi() {
-		return new OpenAPI().info(new Info().title("RESTFul API com Java 18")
-										.version("v1")
-										.description("")
-										.termsOfService("")
-										.license(
-												new License()
-												.name("Apache 2.0")
-												.url("")
-												));
+	public OpenAPI customOpenAPI() {
+		return new OpenAPI()
+			.info(new Info()
+				.title("RESTful API with Java 18 and Spring Boot 3")
+				.version("v1")
+				.description("Some description about your API")
+				.termsOfService("")
+				.license(
+					new License()
+						.name("Apache 2.0")
+						.url("")
+					)
+				);
 	}
 	
 	

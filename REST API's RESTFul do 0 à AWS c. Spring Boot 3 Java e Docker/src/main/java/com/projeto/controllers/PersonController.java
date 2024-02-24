@@ -18,14 +18,38 @@ import com.projeto.data.vo.v1.PersonVO;
 import com.projeto.data.vo.v2.PersonVOV2;
 import com.projeto.services.PersonService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person")
+@Tag(name = "People", description = "Endpoints for Peoples")
 public class PersonController  {
 
 	@Autowired
 	private PersonService service;
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	 @Operation(summary = "Finds all People", description = "Finds all People",
+		tags = {"People"},
+		responses = {
+			@ApiResponse(description = "Success", responseCode = "200",
+				content = {
+					@Content(
+						mediaType = "application/json",
+						array = @ArraySchema(schema = @Schema(implementation = PersonVO.class))
+					)
+				}),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+		}
+	)
 	public List<PersonVO> findAll() {
 		return service.findAll();
 	}
