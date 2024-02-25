@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+//@CrossOrigin 
 @RestController
 @RequestMapping("/api/person")
 @Tag(name = "People", description = "Endpoints for Peoples")
@@ -33,6 +35,7 @@ public class PersonController  {
 	@Autowired
 	private PersonService service;
 	
+	@CrossOrigin(origins = "http://localhost:8080")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	 @Operation(summary = "Finds all People", description = "Finds all People",
 		tags = {"People"},
@@ -60,7 +63,7 @@ public class PersonController  {
 		return service.findById(id);
 	}
 
-	
+	@CrossOrigin(origins = {"http://localhost:8080", "https://localhost:8080"})
 	@PostMapping(value = "/v1",consumes = MediaType.APPLICATION_JSON_VALUE,
 				produces = MediaType.APPLICATION_JSON_VALUE)
 	public PersonVO create(@RequestBody PersonVO PersonVO) throws Exception {
