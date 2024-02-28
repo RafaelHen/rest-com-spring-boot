@@ -1,5 +1,10 @@
 cors:
-  originPatterns: http://localhost:3000,http://localhost:8080,https://erudio.com.br
+  originPatterns: http://localhost:3000,http://localhost:8080
+security:
+ jwt:
+  token:
+    security-key: 53scr37
+    expire-lenght: 36000
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
