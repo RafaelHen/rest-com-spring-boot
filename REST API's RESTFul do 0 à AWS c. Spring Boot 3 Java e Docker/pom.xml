@@ -17,7 +17,6 @@
 		<java.version>18</java.version>
 		<dozer.version>6.4.0</dozer.version>
 		<java-jwt.version>3.18.3</java-jwt.version>
-
 	</properties>
 	<dependencies>
 		<dependency>
