@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.projeto.data.vo.v1.security.TokenVO;
 
@@ -39,16 +41,23 @@ public class JwtTokenProvider {
 		Date now = new Date();
 		Date validity = new Date(now.getTime() + validityInMilliseconds);
 		var acessToken = getAcessToken(username, roles, now, validity);
-		var refreshToken = getAcessToken(username, roles, now);
+		var refreshToken = getRefreshToken(username, roles, now);
 		return new TokenVO(username, true, now, validity, acessToken, refreshToken);	
 	}
 
-	private String getAcessToken(String username, List<String> roles, Date now) {
+	private String getRefreshToken(String username, List<String> roles, Date now) {
 		return null;
 	}
 
 	private String getAcessToken(String username, List<String> roles, Date now, Date validity) {
-		// TODO Auto-generated method stub
-		return null;
+		Date validityRefreshToken = new Date(now.getTime() + (validityInMilliseconds * 3));
+		String issuerUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+		return JWT.create()
+				.withClaim("roles", roles)
+				.withIssuedAt(now)
+				.withExpiresAt(validityRefreshToken)
+				.withSubject(username)
+				.sign(algorithm)
+				.strip();
 	}
 }
