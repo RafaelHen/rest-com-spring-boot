@@ -44,7 +44,7 @@ public class JwtTokenProvider {
 
 	}
 	
-	private TokenVO createAcessToken(String username, List<String> roles) {
+	public TokenVO createAcessToken(String username, List<String> roles) {
 		Date now = new Date();
 		Date validity = new Date(now.getTime() + validityInMilliseconds);
 		var acessToken = getAcessToken(username, roles, now, validity);
@@ -101,5 +101,10 @@ public class JwtTokenProvider {
 		} catch (Exception e) {
 			throw new InvalidJwtAuthenticationException("Expired or invalid JWT token! ");
 		}
+	}
+
+	public TokenVO refreshToken(String refreshToken) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

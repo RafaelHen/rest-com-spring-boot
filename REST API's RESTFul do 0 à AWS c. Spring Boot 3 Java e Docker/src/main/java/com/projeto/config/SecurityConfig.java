@@ -21,11 +21,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.projeto.security.jwt.JwtConfigurer;
 import com.projeto.security.jwt.JwtTokenProvider;
 
-
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
-
 
 	@Autowired
 	private JwtTokenProvider tokenProvider;
@@ -61,7 +59,7 @@ public class SecurityConfig {
 							"/auth/signin",
 							"/auth/refresh/**",
                     		"/swagger-ui/**",
-                    		"/v3/api-docs/**"
+                    		"/v1/api-docs/**"
                 		).permitAll()
                         .requestMatchers("/api/**").authenticated()
                         .requestMatchers("/users").denyAll()
@@ -73,5 +71,4 @@ public class SecurityConfig {
                 .build();
  
     }
-	
 }
