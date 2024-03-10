@@ -1,5 +1,6 @@
 package com.projeto.config;
 
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -9,19 +10,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer{
 
 	@Value("${cors.originPatterns:default}")
-	private String corsOriginPatters = "";
+	private String corsOriginPatterns = "";
 
-	@Override //Habilitando CORS de forma global
+	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		var allowedOrigins = corsOriginPatters.split(",");
+		var allowedOrigins = corsOriginPatterns.split(",");
 		registry.addMapping("/**")
-//		.allowedMethods("GET","PUT","POST")
-		.allowedMethods("*")
-		.allowedOrigins(allowedOrigins)
+			//.allowedMethods("GET", "POST", "PUT")
+			.allowedMethods("*")
+			.allowedOrigins(allowedOrigins)
 		.allowCredentials(true);
 	}
-	
-	
-	
+
 	
 }
