@@ -59,7 +59,7 @@ public class SecurityConfig {
 							"/auth/signin",
 							"/auth/refresh/**",
                     		"/swagger-ui/**",
-                    		"/v1/api-docs/**",
+                    		"/v3/api-docs/**",
                     		"/swagger-ui/index.html"
                 		).permitAll()
                         .requestMatchers("/api/person").authenticated()
