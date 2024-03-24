@@ -10,7 +10,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/rest_with_spring
     username: postgres
-    password: PnCdEL
+    password: elerp
   jpa:
     hibernate:
       ddl-auto: update
@@ -19,9 +19,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
 springdoc:
-  pathsToMatch: 
-    - /api/person
-    - /auth/
+  pathsToMatch: /api/person
   swagger-ui:
     use-root-path: true
   
