@@ -20,8 +20,8 @@ spring:
     show-sql: true
 springdoc:
   pathsToMatch: 
-    - /api/person
-    - /auth/
+    - /api/person/**
+    - /auth/**
   swagger-ui:
     use-root-path: true
   
