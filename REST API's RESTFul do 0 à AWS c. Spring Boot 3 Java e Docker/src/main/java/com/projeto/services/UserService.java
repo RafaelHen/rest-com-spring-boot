@@ -37,6 +37,7 @@ public class UserService implements UserDetailsService{
 		this.repository = repository;
 	}
 
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		logger.info("Finding one user by name "+username+"!");
